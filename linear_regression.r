@@ -10,7 +10,6 @@ print("Number of rows and columns of input table:")
 print(dim(df_all))
 writeLines("\n")
 View(df_all) 	# spreadsheet view
-#print(str(df_all))	# variable/column types 
 
 df_regr <- df_all[,c('Height', 'Weight')] # extract 2 columns for regression analysis into a new dataframe 
 
@@ -24,6 +23,7 @@ writeLines("\n")
 
 linearMod <- lm(Weight ~ Height, data=df_regr)	# fit a linear regression model
 
-#print(linearMod) 	# coefficients of the fitted model
+# TODO: get P values - statistical significance of the model
+# TODO: get R2 value
+# TODO: get pretty plots
 
-#print(summary(linearMod)) 	# p-value and other goodness of fit measures

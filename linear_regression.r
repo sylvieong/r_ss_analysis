@@ -1,15 +1,22 @@
-mydata <- read.table("C:/Users/Janice_2/Documents/ss_analysis/Sample_Dataset_2014c.csv", header=TRUE, sep=",", quote="\"")
-dim(mydata)
+data_dir = "C:/Users/Janice_2/Documents/ss_analysis/"
+data_file = "Sample_Dataset_2014c.csv"
+data_path = paste(data_dir, data_file, sep = '')
+print(data_path)
 
-dfnew1 <- mydata[,c('Height', 'Weight')]
+df_all <- read.table(data_path, header=TRUE, sep=",", quote="\"") # read csv file into a dataframe
+print(dim(df_all))
+View(df_all) 	# spreadsheet view
+print(str(df_all))	# variable/column types 
 
-print(summary(dfnew1))
+df_regr <- df_all[,c('Height', 'Weight')] # extract 2 columns for regression analysis into a new dataframe 
 
-#Height          Weight     
-# Min.   :55.00   Min.   :101.7  
-# 1st Qu.:64.83   1st Qu.:153.9  
-# Median :67.57   Median :173.0  
-# Mean   :68.03   Mean   :181.0  
-# 3rd Qu.:71.58   3rd Qu.:204.3  
-# Max.   :84.41   Max.   :350.1  
-# NA's   :27      NA's   :59
+print(summary(df_regr)) 	# basic statistics of extracted variables
+
+print(cor(df_regr$Height, df_regr$Weight, use="complete.obs"))	# correlation coefficient between 2 variables, strength of relationship
+
+linearMod <- lm(Weight ~ Height, data=df_regr)	# fit a linear regression model
+
+
+print(linearMod) 	# coefficients of the fitted model
+
+print(summary(linearMod)) 	# p-value and other goodness of fit measures

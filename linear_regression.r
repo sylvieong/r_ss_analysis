@@ -26,10 +26,10 @@ linearMod <- lm(Weight ~ Height, data=df_regr)	# fit a linear regression model
 
 library(ggplot2)
 
-# basic plot with fitted regression line
-print("Plotting fitted regression line...", quote=FALSE)
-writeLines("\n")
-plot(ggplot(df_regr, aes(x=Height, y=Weight)) + geom_point(shape=1) +  geom_smooth(method=lm , color="green", se=FALSE))
+# # basic plot with fitted regression line
+# print("Plotting fitted regression line...", quote=FALSE)
+# writeLines("\n")
+# plot(ggplot(df_regr, aes(x=Height, y=Weight)) + geom_point(shape=1) +  geom_smooth(method=lm , color="green", se=FALSE))
 
 dev.new()
 # with a little more of color
@@ -48,5 +48,27 @@ plot(ggplot(df_regr, aes(x=Height, y=Weight)) + geom_point(
 # TODO: get P values - statistical significance of the model
 # TODO: get R2 value
 
+# Gender is currently coded as numerical (0 and 1), map it to categorical
+df_all$GenderCoded = cut(df_all$Gender, breaks = c(-1, 0, 1), labels = c("Male", "Female"))
+
+# Athete is currently coded as numerical (0 and 1), map it to categorical
+df_all$AthleteCoded = cut(df_all$Athlete, breaks = c(-1, 0, 1), labels = c("No", "Yes"))
+
+dev.new()
+# plot points differentiate by gender
+print("Plotting, by gender...", quote=FALSE)
+writeLines("\n")
+plot(ggplot(df_all, aes(x=Height, y=Weight, color=GenderCoded, size=GenderCoded)) +  
+     geom_point(size=2, alpha=0.5))
+
+
+dev.new()
+# plot points differentiate by gender
+print("Plotting, by athlete status...", quote=FALSE)
+writeLines("\n")
+plot(ggplot(df_all, aes(x=Height, y=Weight, color=AthleteCoded, size=AthleteCoded)) +  
+     geom_point(size=2, alpha=0.5))
+
+
 # TODO: other visualizations and data explorations get pretty plots
-# TODO: include weight/height split by gender
+

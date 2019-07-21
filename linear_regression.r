@@ -32,6 +32,7 @@ writeLines("\n")
 # get p values 
 f <- lm_stats$fstatistic
 p <- pf(f[1],f[2],f[3],lower.tail=F)
+attributes(p) <- NULL
 
 print("p-value:", quote=FALSE)
 print(p)

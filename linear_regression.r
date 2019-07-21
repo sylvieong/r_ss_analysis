@@ -29,8 +29,13 @@ print("R-squared value:", quote=FALSE)
 print(lm_stats$r.squared)
 writeLines("\n")
 
+# get p values 
+f <- lm_stats$fstatistic
+p <- pf(f[1],f[2],f[3],lower.tail=F)
+
 print("p-value:", quote=FALSE)
-print(lm_stats$coefficients[,4])
+print(p)
+# print(lm_stats$coefficients[2,4]) # also the p-value when 2-variable instead of multi=linear
 writeLines("\n")
 
 

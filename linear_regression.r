@@ -33,7 +33,7 @@ dev.new()
 # plot points with fitted linear model
 print("Plotting fitted regression line with color...", quote=FALSE)
 writeLines("\n")
-plot(ggplot(df_regr, aes(x=Height, y=Weight)) + geom_point(
+plot(ggplot(df_all, aes(x=Height, y=Weight)) + geom_point(
     color="blue",
         fill="blue",
         shape=21,
@@ -71,28 +71,28 @@ print("Plotting densities...", quote=FALSE)
 writeLines("\n")
 
 dev.new()
-plot(ggplot(df_regr, aes(x=Height, y=Weight) ) +
+plot(ggplot(df_all, aes(x=Height, y=Weight) ) +
   geom_bin2d() +
   theme_bw())
 
 dev.new()
-plot(ggplot(df_regr, aes(x=Height, y=Weight) ) +
+plot(ggplot(df_all, aes(x=Height, y=Weight) ) +
   geom_bin2d() +
   theme_bw() +
   scale_fill_distiller(palette= "Spectral", direction=1))
 
 
 dev.new()
-plot(ggplot(df_regr, aes(x=Height, y=Weight) ) +
+plot(ggplot(df_all, aes(x=Height, y=Weight) ) +
   stat_density_2d(aes(fill = ..level..), geom = "polygon") +
   scale_fill_distiller(palette= "Spectral", direction=1))
 
 dev.new()
-plot(ggplot(df_regr, aes(x=Height, y=Weight) ) +
+plot(ggplot(df_all, aes(x=Height, y=Weight) ) +
   stat_density_2d(aes(fill = ..level..), geom = "polygon")) 
 
 dev.new()
-plot <- ggplot(df_regr, aes(x=Height, y=Weight))
+plot <- ggplot(df_all, aes(x=Height, y=Weight))
 plot(plot + stat_density2d(geom="tile", aes(fill = ..density..), contour = FALSE) + geom_point(colour = "white"))
 
 
@@ -131,8 +131,3 @@ plot(ggplot(df_all, aes(x=AthleteCoded, y=Height, fill=AthleteCoded)) +
         outlier.size=2
     
     ) + theme(legend.position="none"))
-
-
-
-
-# change all df_regr to df_all except summary stats

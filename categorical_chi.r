@@ -113,7 +113,41 @@ print("Best v value:", quote=FALSE)
 print(best_v_var, quote=FALSE)
 print(best_v)
 
-# plots with Athlete,  Gender, Smoking
+# plots with Athlete, Gender, Smoking
+
+# bar plots - x: Athete, by: Gender
+tbl = table(df_all$GenderCoded, df_all$AthleteCoded) 
+df = as.data.frame(tbl)
+
+# counts
+dev.new()
+plot(ggplot(df, aes(fill=df$Var1, y=df$Freq, x=df$Var2)) + 
+    geom_bar(position="dodge", stat="identity") + scale_fill_brewer(palette = "Set2")) 
+
+# percentages
+dev.new()
+plot(ggplot(df, aes(fill=df$Var1, y=df$Freq, x=df$Var2)) + 
+    geom_bar( stat="identity", position="fill") + scale_fill_brewer(palette = "Set2")) 
+
+# bar plots - x: Athete, by: Smoking
+tbl = table(df_all$SmokingCoded, df_all$AthleteCoded) 
+df = as.data.frame(tbl)
+
+# counts
+dev.new()
+plot(ggplot(df, aes(fill=df$Var1, y=df$Freq, x=df$Var2)) + 
+    geom_bar(position="dodge", stat="identity") + scale_fill_brewer(palette = "Set2")) 
+
+# percentages
+dev.new()
+plot(ggplot(df, aes(fill=df$Var1, y=df$Freq, x=df$Var2)) + 
+    geom_bar( stat="identity", position="fill") + scale_fill_brewer(palette = "Set2")) 
+
+
+# pie charts
+
+
+# interaction among three variables
 
 
 

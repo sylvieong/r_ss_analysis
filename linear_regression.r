@@ -95,3 +95,24 @@ dev.new()
 plot <- ggplot(df_regr, aes(x=Height, y=Weight))
 plot(plot + stat_density2d(geom="tile", aes(fill = ..density..), contour = FALSE) + geom_point(colour = "white"))
 
+
+# box plots
+print("Box plots...", quote=FALSE)
+writeLines("\n")
+# dev.new()
+# ggplot(df_all, aes(x=as.factor(GenderCoded), y=Height)) + 
+#     geom_boxplot(fill="slateblue", alpha=0.2) + 
+#     xlab("Gender")
+
+
+# ggplot(df_all, aes(x=as.factor(AthleteCoded), y=Height)) + 
+#     geom_boxplot(fill="slateblue", alpha=0.2) + 
+#     xlab("Athete Status")    
+
+
+dev.new()
+par(mfrow=c(1, 2))  # divide graph area in 2 columns
+
+#plot(boxplot(df_all$Height, main="Height", sub=paste("Outlier rows: ", length(boxplot.stats(df_all$Height)$out))))  
+
+plot(boxplot(df_all$Weight, main="Weight", sub=paste("Outlier rows: ", length(boxplot.stats(df_all$Weight)$out)))) 

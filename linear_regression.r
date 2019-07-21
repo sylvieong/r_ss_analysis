@@ -90,3 +90,8 @@ plot(ggplot(df_regr, aes(x=Height, y=Weight) ) +
 dev.new()
 plot(ggplot(df_regr, aes(x=Height, y=Weight) ) +
   stat_density_2d(aes(fill = ..level..), geom = "polygon")) 
+
+dev.new()
+plot <- ggplot(df_regr, aes(x=Height, y=Weight))
+plot(plot + stat_density2d(geom="tile", aes(fill = ..density..), contour = FALSE) + geom_point(colour = "white"))
+

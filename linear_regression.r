@@ -24,16 +24,14 @@ writeLines("\n")
 
 linearMod <- lm(Weight ~ Height, data=df_regr)	# fit a linear regression model
 
+# TODO: get P values - statistical significance of the model
+# TODO: get R2 value
+
 library(ggplot2)
 
-# # basic plot with fitted regression line
-# print("Plotting fitted regression line...", quote=FALSE)
-# writeLines("\n")
-# plot(ggplot(df_regr, aes(x=Height, y=Weight)) + geom_point(shape=1) +  geom_smooth(method=lm , color="green", se=FALSE))
-
 dev.new()
-# with a little more of color
-print("Plotting fitted regression line with more color...", quote=FALSE)
+# plot points with fitted linear model
+print("Plotting fitted regression line with color...", quote=FALSE)
 writeLines("\n")
 plot(ggplot(df_regr, aes(x=Height, y=Weight)) + geom_point(
     color="blue",
@@ -43,10 +41,6 @@ plot(ggplot(df_regr, aes(x=Height, y=Weight)) + geom_point(
         size=2,
         stroke = 2) +  geom_smooth(method=lm , color="green", se=FALSE))
 
-
-
-# TODO: get P values - statistical significance of the model
-# TODO: get R2 value
 
 # Gender is currently coded as numerical (0 and 1), map it to categorical
 df_all$GenderCoded = cut(df_all$Gender, breaks = c(-1, 0, 1), labels = c("Male", "Female"))
@@ -72,3 +66,27 @@ plot(ggplot(df_all, aes(x=Height, y=Weight, color=AthleteCoded, size=AthleteCode
 
 # TODO: other visualizations and data explorations get pretty plots
 
+# plots with density
+print("Plotting densities...", quote=FALSE)
+writeLines("\n")
+
+dev.new()
+plot(ggplot(df_regr, aes(x=Height, y=Weight) ) +
+  geom_bin2d() +
+  theme_bw())
+
+dev.new()
+plot(ggplot(df_regr, aes(x=Height, y=Weight) ) +
+  geom_bin2d() +
+  theme_bw() +
+  scale_fill_distiller(palette= "Spectral", direction=1))
+
+
+dev.new()
+plot(ggplot(df_regr, aes(x=Height, y=Weight) ) +
+  stat_density_2d(aes(fill = ..level..), geom = "polygon") +
+  scale_fill_distiller(palette= "Spectral", direction=1))
+
+dev.new()
+plot(ggplot(df_regr, aes(x=Height, y=Weight) ) +
+  stat_density_2d(aes(fill = ..level..), geom = "polygon")) 

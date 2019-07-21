@@ -99,20 +99,40 @@ plot(plot + stat_density2d(geom="tile", aes(fill = ..density..), contour = FALSE
 # box plots
 print("Box plots...", quote=FALSE)
 writeLines("\n")
-# dev.new()
-# ggplot(df_all, aes(x=as.factor(GenderCoded), y=Height)) + 
-#     geom_boxplot(fill="slateblue", alpha=0.2) + 
-#     xlab("Gender")
+ 
+dev.new()
+split.screen( figs = c( 1, 2 ) )
+screen(1)
+boxplot(df_all$Weight, main="Weight", sub=paste("Outlier rows: ", length(boxplot.stats(df_all$Weight)$out)))
+screen(2)
+boxplot(df_all$Height, main="Height", sub=paste("Outlier rows: ", length(boxplot.stats(df_all$Height)$out)))
 
-
-# ggplot(df_all, aes(x=as.factor(AthleteCoded), y=Height)) + 
-#     geom_boxplot(fill="slateblue", alpha=0.2) + 
-#     xlab("Athete Status")    
+dev.new()
+plot(ggplot(df_all, aes(x=AthleteCoded, y=Weight, fill=AthleteCoded)) + 
+    geom_boxplot(
+        
+        alpha=0.3,
+        
+        # custom outliers
+        outlier.colour="red",
+        outlier.size=2
+    
+    ) + theme(legend.position="none"))
 
 
 dev.new()
-par(mfrow=c(1, 2))  # divide graph area in 2 columns
+plot(ggplot(df_all, aes(x=AthleteCoded, y=Height, fill=AthleteCoded)) + 
+    geom_boxplot(
+        
+        alpha=0.3,
+        
+        # custom outliers
+        outlier.colour="red",
+        outlier.size=2
+    
+    ) + theme(legend.position="none"))
 
-#plot(boxplot(df_all$Height, main="Height", sub=paste("Outlier rows: ", length(boxplot.stats(df_all$Height)$out))))  
 
-plot(boxplot(df_all$Weight, main="Weight", sub=paste("Outlier rows: ", length(boxplot.stats(df_all$Weight)$out)))) 
+
+
+# change all df_regr to df_all except summary stats

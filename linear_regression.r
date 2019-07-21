@@ -18,14 +18,21 @@ print("Basic statistics of variables extracted for analysis:", quote=FALSE)
 print(summary(df_regr)) 	# basic statistics of extracted variables
 writeLines("\n")
 
-print("Correlation coeff (R-value):", quote=FALSE)
+print("Correlation coefficient (R value):", quote=FALSE)
 print(cor(df_regr$Height, df_regr$Weight, use="complete.obs"))	# correlation coefficient between 2 variables, strength of relationship
 writeLines("\n")
 
 linearMod <- lm(Weight ~ Height, data=df_regr)	# fit a linear regression model
+lm_stats = summary(linearMod)
 
-# TODO: get P values - statistical significance of the model
-# TODO: get R2 value
+print("R-squared value:", quote=FALSE)
+print(lm_stats$r.squared)
+writeLines("\n")
+
+print("p-value:", quote=FALSE)
+print(lm_stats$coefficients[,4])
+writeLines("\n")
+
 
 library(ggplot2)
 
@@ -63,8 +70,6 @@ writeLines("\n")
 plot(ggplot(df_all, aes(x=Height, y=Weight, color=AthleteCoded, size=AthleteCoded)) +  
      geom_point(size=2, alpha=0.5))
 
-
-# TODO: other visualizations and data explorations get pretty plots
 
 # plots with density
 print("Plotting densities...", quote=FALSE)

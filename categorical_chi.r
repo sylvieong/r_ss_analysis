@@ -144,10 +144,14 @@ plot(ggplot(df, aes(fill=df$Var1, y=df$Freq, x=df$Var2)) +
     geom_bar( stat="identity", position="fill") + scale_fill_brewer(palette = "Set2")) 
 
 
-# pie charts
-
-
 # interaction among three variables
+tbl = table(df_all$GenderCoded, df_all$SmokingCoded, df_all$AthleteCoded)
+df = as.data.frame(tbl)
+
+library(vcd)
+tab = xtabs(Freq ~ Var1+Var2+Var3, data=df)
+dev.new()
+mosaic(data=tab, ~ Var1+Var2+Var3, shade=TRUE, cex=2.5)
 
 
 

@@ -124,6 +124,8 @@ dev.new()
 plot(ggplot(df, aes(fill=df$Var1, y=df$Freq, x=df$Var2)) + 
     geom_bar(position="dodge", stat="identity") + scale_fill_brewer(palette = "Set2")) 
 
+# balloon plots
+
 # percentages
 dev.new()
 plot(ggplot(df, aes(fill=df$Var1, y=df$Freq, x=df$Var2)) + 
@@ -143,6 +145,7 @@ dev.new()
 plot(ggplot(df, aes(fill=df$Var1, y=df$Freq, x=df$Var2)) + 
     geom_bar( stat="identity", position="fill") + scale_fill_brewer(palette = "Set2")) 
 
+# balloon plots
 
 # interaction among three variables
 tbl = table(df_all$GenderCoded, df_all$SmokingCoded, df_all$AthleteCoded)

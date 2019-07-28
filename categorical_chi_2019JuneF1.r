@@ -1,4 +1,6 @@
-data_file = "LFS-71M0001-E-2019-June_F1c.csv"
+
+data_dir = "C:/Users/SylvieOng/Desktop/TempJanice/DataJobApp/r_ss_analysis/"
+data_file = "LFS-71M0001-E-2019-June_F1.csv"
 data_path = paste(data_dir, data_file, sep = '')
 writeLines("\n")
 print("Reading data from file:", quote=FALSE)
@@ -13,7 +15,7 @@ View(df_all)    # spreadsheet view
 
 # map a bunch of numerically coded variables to categorical
 # UNION is currently coded as numerical, map it to categorical
-df_all$UNIONCoded = cut(df_all$UNION, breaks = c(0, 1, 3), labels = c("Union member", "Non-unionized"))
+df_all$UNIONCoded = cut(df_all$UNION, breaks = c(0, 1, 2, 3), labels = c("Union member", "Non-member", "Non-unionized"))
 
 # PROV is currently coded as numerical, map it to categorical
 df_all$PROVCoded = cut(df_all$PROV, breaks = c(0, 10, 11, 12, 13, 24, 35, 46, 47, 48, 59), 
@@ -36,13 +38,14 @@ print("Cramer's V (the smaller v, the lower the correlation):", quote=FALSE)
 print(v)
 writeLines("\n")
 
+library(ggplot2)
+
 # bar plots - x: PROV, by: UNION
-tbl = table(df_all$UNIONCoded, df_all$PROVCoded) 
 df = as.data.frame(tbl)
 
 # counts
 dev.new()
-plot(ggplot(df, aes(fill=df$Var1, y=df$Freq, x=reorder(df$Var2, df$Var1))) + 
+plot(ggplot(df, aes(fill=df$Var1, y=df$Freq, x=df$Var2)) + 
     geom_bar(position="dodge", stat="identity") + scale_fill_brewer(palette = "Set2")) 
 
 # percentages

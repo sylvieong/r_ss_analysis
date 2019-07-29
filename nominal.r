@@ -1,7 +1,5 @@
 
-data_dir = "C:/Users/SylvieOng/Desktop/TempJanice/DataJobApp/r_ss_analysis/"
-data_file = "mtcars.csv"
-data_path = paste(data_dir, data_file, sep = '')
+data_path = "./car_road_test.csv"
 writeLines("\n")
 print("Reading data from file:", quote=FALSE)
 print(data_path)

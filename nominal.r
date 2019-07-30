@@ -1,5 +1,4 @@
-
-# Location (. points to the current working directory) and name of the data file.
+# Location and name of the data file. Note that "./" points to the current working directory.
 # TODO: Replace with the location and name of your data file.
 data_path = "./car_road_test.csv"
 
@@ -14,7 +13,7 @@ print("Number of rows and columns of input table:", quote=FALSE)
 print(dim(df))
 writeLines("\n")
 
-# Opens a new window and displays spreadsheet-like view of the data frame df.
+# Open a new window and displays spreadsheet-like view of the data frame df.
 View(df)    
 
 # B. Map numerically coded nominal columns to categorical coding. 
@@ -35,7 +34,7 @@ df$vsCoded <- cut(df$vs, breaks = c(-1, 0, 1), labels = c("v-shaped", "straight"
 # C. Perform chi test between the columns amCoded and vsCoded.
 # (1) Create a table populated with the co-occurence counts of values of amCoded and vsCoded, 
 # i.e. the contingency table of amCoded and vsCoded.
-# TODO: Replace vsCoded and amCoded with the names of the new columns you created in B..
+# TODO: Replace vsCoded and amCoded with the names of the new columns you created in B.
 tbl <- table(df$vsCoded, df$amCoded) 
 # The content of tbl is:
 #           automatic manual

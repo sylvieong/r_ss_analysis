@@ -48,7 +48,7 @@ print("p-value:", quote=FALSE)
 print(p)
 writeLines("\n")
 
-# C. Map numerically coded nominal columns to categorical coding. 
+# C. Map numerically coded nominal column to categorical coding. 
 # The am column is originally coded numerically, map it to categorical values.
 # A new column amCoded, is created in the data frame df. 
 # The command maps:
@@ -57,7 +57,7 @@ writeLines("\n")
 # TODO: Replace am with the name of the column to be mapped in your dataset.
 # TODO: Replace -1, 0, 1 according to the numerical coding in the column to be mapped. 
 # TODO: Replace "automatic", "manual" with the categorical values you want to map to.
-# TODO: Replace amCoded with the name of the new column you want to create.
+# TODO: Replace amCoded with the name of the new column you want to create,
 # repeat for everywhere else that amCoded appears in this file.
 df$amCoded = cut(df$am, breaks = c(-1, 0, 1), labels = c("automatic", "manual"))
 

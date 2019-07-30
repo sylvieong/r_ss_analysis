@@ -16,7 +16,7 @@ writeLines("\n")
 # Open a new window and displays spreadsheet-like view of the data frame df.
 View(df)    
 
-# B. Map numerically coded nominal columns to categorical coding. 
+# B. Map numerically coded nominal variable columns to categorical coding. 
 # The am column is originally coded numerically, map it to categorical values.
 # A new column amCoded, is created in the data frame df. 
 # The command maps:
@@ -25,16 +25,19 @@ View(df)
 # TODO: Replace am with the name of the column to be mapped in your dataset.
 # TODO: Replace -1, 0, 1 according to the numerical coding in the column to be mapped. 
 # TODO: Replace "automatic", "manual" with the categorical values you want to map to.
-# TODO: Replace amCoded with the name of the new column you want to create.
+# TODO: Replace amCoded with the name of the new column you want to create, 
+# repeat for everywhere else that amCoded appears in this file.
 df$amCoded <- cut(df$am, breaks = c(-1, 0, 1), labels = c("automatic", "manual"))
 
-# the vs column is originally coded numerically, map it to categorical values.
+# The vs column is originally coded numerically, map it to categorical values.
+# Description of command and TODOs are analogous to that for the am column.
+# TODO: Replace vsCoded with the name of the new column you want to create, 
+# repeat for everywhere else that vsCoded appears in this file.
 df$vsCoded <- cut(df$vs, breaks = c(-1, 0, 1), labels = c("v-shaped", "straight"))
 
-# C. Perform chi test between the columns amCoded and vsCoded.
+# C. Perform chi test between the columns (nomimal variables) amCoded and vsCoded.
 # (1) Create a table populated with the co-occurence counts of values of amCoded and vsCoded, 
 # i.e. the contingency table of amCoded and vsCoded.
-# TODO: Replace vsCoded and amCoded with the names of the new columns you created in B.
 tbl <- table(df$vsCoded, df$amCoded) 
 # The content of tbl is:
 #           automatic manual
@@ -72,7 +75,6 @@ df_tbl <- as.data.frame(tbl)
 # 4 straight    manual    7
 
 # (2) Rename the columns of the data frame df_tbl to vsCoded, amCoded and Freq.
-# TODO: Replace vsCoded and amCoded with the names of the new columns you created in B.
 names(df_tbl) <- c("vsCoded", "amCoded", "Freq")
 # The content of df_tbl is now:
 #   vsCoded   amCoded NA
@@ -82,13 +84,11 @@ names(df_tbl) <- c("vsCoded", "amCoded", "Freq")
 #4 straight    manual  7
 
 # (3) Bar plot with counts. 
-# TODO: Replace vsCoded and amCoded with the names of the new columns you created in B.
 dev.new()   # Create a new window to plot in.
 plot(ggplot(df_tbl, aes(fill=df_tbl$amCoded, y=df_tbl$Freq, x=df_tbl$vsCoded)) + 
     geom_bar(position="dodge", stat="identity") + scale_fill_brewer(palette = "Set2")) 
 
 # (4) Bar plot with percentages.
-# TODO: Replace vsCoded and amCoded with the names of the new columns you created in B.
 dev.new()
 plot(ggplot(df_tbl, aes(fill=df_tbl$amCoded, y=df_tbl$Freq, x=df_tbl$vsCoded)) + 
     geom_bar( stat="identity", position="fill") + scale_fill_brewer(palette = "Set2")) 

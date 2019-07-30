@@ -16,23 +16,22 @@ writeLines("\n")
 View(df) 	
 
 # B. Get basic statistics and perform regression. 
-# Extract 2 columns for regression analysis into a new data frame df_regr.
-# TODO: Replace mpg and hp with the ratio columns in your dataset that you want to analyze, 
-# repeat for everywhere else that mpg and hp appears in this file 
+# Extract 2 columns (ratio variables)  into a new data frame df_regr.
+# mpg is the dependent variable, hp is the independent variable.
+# TODO: Replace mpg and hp with the columns (ratio variables) in your dataset that you want to analyze, 
+# repeat for everywhere else that mpg and hp appears in this file. 
 df_regr <- df[,c('mpg', 'hp')] 
 
 print("Basic statistics of variables extracted for analysis:", quote=FALSE)
 print(summary(df_regr)) 
 writeLines("\n")
 
-# Get correlation coefficient between 2 variables.
-# TODO: Replace mpg and hp with the ratio columns in your dataset that you want to analyze.
+# Get correlation coefficient between 2 ratio variables.
 print("Correlation coefficient (R-value):", quote=FALSE)
 print(cor(df_regr$mpg, df_regr$hp, use="complete.obs"))	
 writeLines("\n")
 
 # Fit a linear regression model.
-# TODO: Replace mpg and hp with the columns in your dataset that you want to analyze.
 linearMod <- lm(mpg ~ hp, data=df_regr)	
 lm_stats = summary(linearMod)
 
@@ -59,6 +58,7 @@ writeLines("\n")
 # TODO: Replace -1, 0, 1 according to the numerical coding in the column to be mapped. 
 # TODO: Replace "automatic", "manual" with the categorical values you want to map to.
 # TODO: Replace amCoded with the name of the new column you want to create.
+# repeat for everywhere else that amCoded appears in this file.
 df$amCoded = cut(df$am, breaks = c(-1, 0, 1), labels = c("automatic", "manual"))
 
 # Load the package ggplot2. 
@@ -67,7 +67,6 @@ library(ggplot2)
 # D. Plots.
 
 # Scatter plot and the fitted linear regression line.
-# TODO: Replace mpg and hp with the ratio columns in your dataset that you want to analyze. 
 dev.new() # Create a new window to plot in.
 print("Plotting fitted regression line with color...", quote=FALSE)
 writeLines("\n")
@@ -80,8 +79,6 @@ plot(ggplot(df, aes(x=hp, y=mpg)) + geom_point(
         stroke = 2) +  geom_smooth(method=lm , color="green", se=FALSE))
 
 # Scatter plot differentiated by amCoded.
-# TODO: Replace mpg and hp with the ratio columns in your dataset that you want to analyze. 
-# TODO: Replace amCoded with the name of the new column you created in C.
 dev.new() # Create a new window to plot in.
 print("Plotting, by transmission type...", quote=FALSE)
 writeLines("\n")
@@ -89,7 +86,6 @@ plot(ggplot(df, aes(x=hp, y=mpg, color=amCoded, size=amCoded)) +
      geom_point(size=1, alpha=0.5))
 
 # Density plot
-# TODO: Replace mpg and hp with the ratio columns in your dataset that you want to analyze. 
 dev.new()
 print("Plotting densities...", quote=FALSE)
 writeLines("\n")
@@ -102,7 +98,6 @@ print("Box plots...", quote=FALSE)
 writeLines("\n")
 
 # Box plots for hp and mpg
-# TODO: Replace mpg and hp with the ratio columns in your dataset that you want to analyze. 
 dev.new()
 split.screen( figs = c( 1, 2 ) )
 screen(1)
@@ -111,8 +106,6 @@ screen(2)
 boxplot(df$mpg, main="mpg", sub=paste("Outlier rows: ", length(boxplot.stats(df$mpg)$out)))
 
 # Separate box plots for hp, one for each value of amCoded
-# TODO: Replace hp with the ratio column in your dataset that you want to analyze.
-# TODO: Replace amCoded with the name of the new column you created in C.
 dev.new()
 plot(ggplot(df, aes(x=amCoded, y=hp, fill=amCoded)) + 
     geom_boxplot(
@@ -123,8 +116,6 @@ plot(ggplot(df, aes(x=amCoded, y=hp, fill=amCoded)) +
     ) + theme(legend.position="none"))
 
 # Separate box plots for mpg, one for each value of amCoded
-# TODO: Replace mpg with the ratio column in your dataset that you want to analyze.
-# TODO: Replace amCoded with the name of the new column you created in C.
 dev.new()
 plot(ggplot(df, aes(x=amCoded, y=mpg, fill=amCoded)) + 
     geom_boxplot(
